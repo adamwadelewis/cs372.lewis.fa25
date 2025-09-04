@@ -1,9 +1,6 @@
-CS372 Documents
+CS372 Git Repository
 ==================================
-This folder is for any documents you need to produce for the class.
-For example, some assignments will ask your either theory or
-interpretation questions.   You will put documents containing your
-answer in this folder.
+
 
 # Folder Structure
 
@@ -54,4 +51,14 @@ cmake --build build.windows
 If you're running on Windows, `Cmake` understands the Microsoft Build
 format and will create Visual Studio project files for you.  Just point
 Visual Studio at that folder.    
+
+If you are using macOS, CMake understands XCode project file format but defaults to using traditional UNIX make files.
+You can change this behavior with the command:
+
+```sh
+cmake -S . -B build.macos -G Xcode
+```
+
+CMake will build XCode project files in the `build.macos` folder, which you can use in the usual fashion in Xcode.
+
 
