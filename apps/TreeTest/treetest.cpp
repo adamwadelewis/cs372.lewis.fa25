@@ -239,7 +239,9 @@ TEST(TreeTraversal, TraversalOrders) {
     // Preorder: root, left, right
     EXPECT_EQ(preorder.front(), 3);
     // Inorder: should be sorted
-    EXPECT_EQ(inorder, (std::vector<int>{4,3,2,1}));
+    auto v = std::vector<int>{1, 2, 3, 4};
+    EXPECT_EQ(inorder, v);
+    EXPECT_EQ(inorder[0], 1);
     // Postorder: left, right, root
     EXPECT_EQ(postorder.back(), 3);
 }

@@ -121,13 +121,13 @@ public:
     //
     // Note that we are doing a bit of C++ trickery here.  We are using
     // the Compare type parameter to allow the user to specify how to
-    // compare two values of type T.  The default is std::greater<T>,
+    // compare two values of type T.  The default is std::less<T>,
 	// which means that we are building a binary search tree where the
 	// left subtree contains values less than the root, and the right
 	// subtree contains values greater than the root.
     //
-    template <typename Compare=std::greater<T>>
-    Tree insert(T x, Compare comp=std::greater<T>()) const {
+    template <typename Compare=std::less<T>>
+    Tree insert(T x, Compare comp=std::less<T>()) const {
         if (isEmpty())
             return Tree(Tree(), x, Tree());
         T y = root();
@@ -140,10 +140,10 @@ public:
     }
 
     // Continuing the use of the Compare type parameter, we provide a default
-    // comparison function that uses std::greater<T>.  This allows the user to
+    // comparison function that uses std::less<T>.  This allows the user to
     // provide a callable object that defines how to compare two values of type T.
-    template <typename Compare=std::greater<T>>
-    bool member(T x, Compare comp=std::greater<T>()) const {
+    template <typename Compare=std::less<T>>
+    bool member(T x, Compare comp=std::less<T>()) const {
         if (isEmpty()) {
             return false;
         }
@@ -163,12 +163,12 @@ public:
     // second parameter.
     //
     // The Compare parameter is a function object that defines how to compare
-    // two values of type T.  The default is std::greater<T>, which means that
+    // two values of type T.  The default is std::less<T>, which means that
     // we are looking for a value that is greater than the current node's value.
     //
   
-  template<typename Compare=std::greater<T>>
-  bool find(T x, Tree &subtreeWhereFound, Compare comp=std::greater<T>()) const {
+  template<typename Compare=std::less<T>>
+  bool find(T x, Tree &subtreeWhereFound, Compare comp=std::less<T>()) const {
         if (isEmpty()) {
             subtreeWhereFound = Tree();
             return false;
@@ -230,7 +230,7 @@ std::ostream& operator<<(std::ostream& os, const Tree<T>& tree) {
 		return os;
 	}
 	os << "[";
-	tree.preorder([&os](T val) { os << val << " "; });
+	tree.inorder([&os](T val) { os << val << " "; });
 	os << "]";
 	return os;
 }
